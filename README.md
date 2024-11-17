@@ -1,4 +1,4 @@
-# PG Browser Proxy
+# 𓃰 PG Browser Proxy 🔌
 
 A WebSocket-TCP proxy that enables PostgreSQL clients to connect to a Postgres database running in the browser. Designed to work with [PGlite](https://pglite.dev/), a lightweight embeddable Postgres that runs in WebAssembly.
 
@@ -128,23 +128,25 @@ bun run dev
 
 An example app using PGlite with Drizzle is available in the `examples/pglite-drizzle` directory. To run it:
 
-1. Navigate to the example directory and install dependencies:
+1. Build the core packages:
 ```sh
-cd examples/pglite-drizzle
 bun install
+bun --filter './packages/*' build 
+bun install # ensure pg-proxy binary is available
 ```
 
-2. Start the proxy:
+1. Navigate to the example directory and start the proxy:
 ```sh
+cd examples/pglite-drizzle
 bun run proxy
 ```
 
-3. Start the example app:
+2. Start the example app:
 ```sh
 bun run dev
 ```
 
-4. You can then connect to the database using Drizzle Studio or any other PostgreSQL client:
+3. You can then connect to the database using Drizzle Studio or any other PostgreSQL client:
 ```sh
 bun run db:studio
 ```

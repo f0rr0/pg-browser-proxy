@@ -6,7 +6,8 @@
   "scripts": {
     "typecheck": "turbo run typecheck",
     "lint": "biome check --write",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "sherif": "bunx sherif@latest"
   },
   "keywords": [
     "postgresql",

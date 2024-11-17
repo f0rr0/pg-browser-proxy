@@ -5,7 +5,7 @@ pre-commit:
       run: bunx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
     typecheck:
-      run: bun typecheck
+      run: bun run typecheck
 
 pre-push:
   parallel: true
@@ -13,4 +13,6 @@ pre-push:
     lint:
       run: bunx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {push_files}
     typecheck:
-      run: bun typecheck
+      run: bun run typecheck
+    sherif:
+      run: bun run sherif

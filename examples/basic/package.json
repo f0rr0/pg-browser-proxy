@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.2.13",
-    "@f0rr0/pg-browser": "file:../../packages/browser",
-    "@f0rr0/pg-proxy": "file:../../packages/proxy"
+    "@f0rr0/pg-browser": "workspace:*",
+    "@f0rr0/pg-proxy": "workspace:*"
   },
   "devDependencies": {
     "@pg-browser-proxy/tsconfig": "workspace:*",
