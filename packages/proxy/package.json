@@ -2,7 +2,6 @@
   "name": "@f0rr0/pg-proxy",
   "version": "0.1.0",
   "description": "A WebSocket-TCP proxy that enables PostgreSQL clients to connect to a Postgres database running in the browser",
-  "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
