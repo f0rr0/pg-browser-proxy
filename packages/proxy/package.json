@@ -1,6 +1,7 @@
 {
   "name": "@f0rr0/pg-proxy",
   "version": "0.1.0",
+  "description": "A WebSocket-TCP proxy that enables PostgreSQL clients to connect to a Postgres database running in the browser",
   "private": true,
   "type": "module",
   "main": "dist/index.js",
@@ -10,6 +11,37 @@
     "typecheck": "tsc --noEmit",
     "start": "node --experimental-strip-types src/index.ts",
     "dev": "node --watch --experimental-strip-types src/index.ts"
+  },
+  "keywords": [
+    "postgresql",
+    "postgres",
+    "browser",
+    "websocket",
+    "proxy",
+    "pglite",
+    "drizzle",
+    "drizzle-kit",
+    "prisma",
+    "studio",
+    "wasm",
+    "webassembly",
+    "tcp",
+    "pg_dump",
+    "psql"
+  ],
+  "author": "Sid Jain",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/f0rr0/pg-browser-proxy"
+  },
+  "homepage": "https://github.com/f0rr0/pg-browser-proxy#readme",
+  "bugs": {
+    "url": "https://github.com/f0rr0/pg-browser-proxy/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/f0rr0"
   },
   "dependencies": {
     "debug": "^4.3.7",
