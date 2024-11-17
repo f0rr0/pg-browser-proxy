@@ -1,42 +1,48 @@
+export interface UserMetadata {
+  origin?: string;
+  ip?: string;
+  userAgent?: string;
+  host?: string;
+  port?: string;
+  [key: string]: string | undefined;
+}
+
 class BaseEvent {
   event_message: string;
   metadata: Record<string, unknown>;
+  timestamp: string;
+
   constructor(event_message: string, metadata: Record<string, unknown>) {
     this.event_message = event_message;
     this.metadata = metadata;
+    this.timestamp = new Date().toISOString();
   }
 }
 
 export class DatabaseShared extends BaseEvent {
-  constructor(metadata: { userId: string }) {
+  constructor(metadata: { userMetadata: UserMetadata }) {
     super("database-shared", metadata);
   }
 }
 
 export class DatabaseUnshared extends BaseEvent {
-  constructor(metadata: { userId: string }) {
+  constructor(metadata: { userMetadata: UserMetadata }) {
     super("database-unshared", metadata);
   }
 }
 
 export class UserConnected extends BaseEvent {
-  constructor(metadata: { connectionId: string }) {
+  constructor(metadata: { connectionId: string; userMetadata?: UserMetadata }) {
     super("user-connected", metadata);
   }
 }
 
 export class UserDisconnected extends BaseEvent {
-  constructor(metadata: { connectionId: string }) {
+  constructor(metadata: { connectionId: string; userMetadata?: UserMetadata }) {
     super("user-disconnected", metadata);
   }
 }
 
-type Event =
-  | DatabaseShared
-  | DatabaseUnshared
-  | UserConnected
-  | UserDisconnected;
-
-export async function logEvent(event: Event) {
-  console.log(event);
+export async function logEvent(event: BaseEvent) {
+  console.log(JSON.stringify(event, null, 2));
 }

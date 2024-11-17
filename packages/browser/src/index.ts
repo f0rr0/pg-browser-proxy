@@ -1,4 +1,6 @@
 import { Mutex } from "async-mutex";
+import type { ClientConfig } from "./config.ts";
+import { resolveConfig } from "./config.ts";
 import {
   isStartupMessage,
   isTerminateMessage,
@@ -8,37 +10,100 @@ import {
 
 export type ExecProtocolRawFn = (message: Uint8Array) => Promise<Uint8Array>;
 
-export const createSocket = (execProtocolRaw: ExecProtocolRawFn) => {
-  if (process.env.NODE_ENV === "development") {
-    const ws = new WebSocket("ws://localhost:443");
-    ws.binaryType = "arraybuffer";
+export type SocketEvents = {
+  onOpen?: () => void;
+  onClose?: () => void;
+  onError?: (error: Event) => void;
+  onMessage?: (message: Uint8Array) => void;
+};
 
-    const mutex = new Mutex();
+type Socket = {
+  close: () => void;
+};
 
-    ws.onmessage = (event) => {
-      mutex.runExclusive(async () => {
-        const data = new Uint8Array(event.data);
-        const { connectionId, message } = parse(data);
+let instance: Socket | null = null;
 
-        if (isStartupMessage(message) || isTerminateMessage(message)) {
-          return;
-        }
-
-        const response = await execProtocolRaw(message);
-        ws.send(serialize(connectionId, response));
-      });
-    };
-
-    ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-
-    ws.onopen = () => {
-      console.log("Connected to local WebSocket server");
-    };
-
-    return ws;
+export const createSocket = (
+  execProtocolRaw: ExecProtocolRawFn,
+  events?: SocketEvents,
+  config?: ClientConfig,
+): Socket => {
+  if (instance) {
+    throw new Error("WebSocket client is already initialized.");
   }
 
-  return null;
+  if (process.env.NODE_ENV !== "development") {
+    console.warn(
+      "createSocket should only be used in development environments.",
+    );
+  }
+
+  const resolvedConfig = resolveConfig(config);
+  const wsUrl = `ws://${resolvedConfig.wsHost}:${resolvedConfig.wsPort}`;
+
+  console.log(`Attempting to connect to WebSocket server at ${wsUrl}`);
+
+  const ws = new WebSocket(wsUrl);
+  ws.binaryType = "arraybuffer";
+
+  const mutex = new Mutex();
+
+  ws.onopen = () => {
+    console.log("✅ Connected to local WebSocket server");
+    events?.onOpen?.();
+  };
+
+  ws.onmessage = (event) => {
+    mutex.runExclusive(async () => {
+      const data = new Uint8Array(event.data);
+      const { connectionId, message } = parse(data);
+
+      if (isStartupMessage(message) || isTerminateMessage(message)) {
+        return;
+      }
+
+      // Notify user code of received message
+      events?.onMessage?.(message);
+
+      const response = await execProtocolRaw(message);
+      ws.send(serialize(connectionId, response));
+    });
+  };
+
+  ws.onerror = (error) => {
+    console.error("❌ WebSocket connection error:", error);
+    console.error(`
+Failed to connect to WebSocket server at ${wsUrl}
+Please check:
+1. Is pg-proxy running? Start it with: bunx @f0rr0/pg-proxy
+2. Is the port ${resolvedConfig.wsPort} correct? You can change it with:
+   - CLI: bunx @f0rr0/pg-proxy --ws-port <port>
+   - Code: createSocket(execFn, events, { wsPort: <port> })
+3. Is the host ${resolvedConfig.wsHost} correct?
+`);
+    events?.onError?.(error);
+  };
+
+  ws.onclose = (event) => {
+    console.log(`
+WebSocket connection closed ${event.wasClean ? "cleanly" : "unexpectedly"}
+${event.wasClean ? "" : "If this was unexpected, you can:"}
+${event.wasClean ? "" : "1. Reload the page to reconnect"}
+${event.wasClean ? "" : "2. Check if pg-proxy is still running"}
+${event.wasClean ? "" : "3. Check the console for any error messages"}
+Code: ${event.code}
+Reason: ${event.reason || "No reason provided"}
+`);
+    events?.onClose?.();
+    instance = null; // Allow reconnection after close
+  };
+
+  instance = {
+    close: () => {
+      ws.close(1000, "Closed by client");
+      instance = null;
+    },
+  };
+
+  return instance;
 };

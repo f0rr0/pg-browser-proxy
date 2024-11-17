@@ -1,15 +1,13 @@
 import type { PostgresConnection } from "pg-gateway";
 import type { WebSocket } from "ws";
 
-type ConnectionId = string;
-
 class ConnectionManager {
   private connection?: PostgresConnection;
   private websocket?: WebSocket;
-  private connectionId?: ConnectionId;
+  private connectionId?: string;
 
   public hasConnection() {
-    return !!this.connection && !!this.connectionId;
+    return !!this.connection;
   }
 
   public getConnection() {
@@ -20,9 +18,9 @@ class ConnectionManager {
     return this.connectionId;
   }
 
-  public setConnection(connectionId: ConnectionId, socket: PostgresConnection) {
+  public setConnection(connectionId: string, connection: PostgresConnection) {
     this.connectionId = connectionId;
-    this.connection = socket;
+    this.connection = connection;
   }
 
   public deleteConnection() {

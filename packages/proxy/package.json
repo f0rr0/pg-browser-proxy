@@ -7,7 +7,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "start": "node --experimental-strip-types src/index.ts",
-    "dev": "node --watch --experimental-strip-types src/index.ts"
+    "dev": "node --watch --experimental-strip-types src/index.ts",
+    "test": "bun test"
   },
   "keywords": [
     "postgresql",
@@ -44,7 +45,8 @@
     "debug": "^4.3.7",
     "nanoid": "^5.0.7",
     "pg-gateway": "^0.3.0-beta.3",
-    "ws": "^8.18.0"
+    "ws": "^8.18.0",
+    "commander": "^11.1.0"
   },
   "devDependencies": {
     "@pg-browser-proxy/tsconfig": "workspace:*",
@@ -54,8 +56,14 @@
     "@types/ws": "^8.5.13",
     "typescript": "^5.8.0-dev.20241116"
   },
-  "files": ["bin"],
+  "files": ["bin/src"],
+  "main": "./bin/src/index.js",
+  "exports": {
+    ".": {
+      "import": "./bin/src/index.js"
+    }
+  },
   "bin": {
-    "pg-proxy": "bin/index.js"
+    "pg-proxy": "bin/src/index.js"
   }
 }

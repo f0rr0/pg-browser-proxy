@@ -97,7 +97,6 @@ export default defineConfig({
 - Only one browser connection is allowed at a time
 - TCP clients have a 5-minute idle timeout
 - WebSocket connections have a 1-hour lifetime
-- The proxy includes middleware to handle pg_dump compatibility with PGlite < v0.2.8
 
 ## Development
 
