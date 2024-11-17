@@ -1,0 +1,35 @@
+{
+  "name": "@f0rr0/pg-proxy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node --experimental-strip-types src/index.ts",
+    "dev": "node --watch --experimental-strip-types src/index.ts"
+  },
+  "dependencies": {
+    "debug": "^4.3.7",
+    "nanoid": "^5.0.7",
+    "pg-gateway": "^0.3.0-beta.3",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@pg-browser-proxy/tsconfig": "workspace:*",
+    "@tsconfig/node-lts": "^22.0.0",
+    "@types/debug": "^4.1.12",
+    "@types/node": "^22.9.0",
+    "@types/ws": "^8.5.13",
+    "typescript": "^5.8.0-dev.20241116"
+  },
+  "files": ["dist"],
+  "bin": {
+    "pg-proxy": "./dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  }
+}

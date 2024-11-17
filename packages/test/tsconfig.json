@@ -1,0 +1,4 @@
+{
+  "extends": "@pg-browser-proxy/tsconfig/base.json",
+  "include": ["./**/*.ts"]
+}

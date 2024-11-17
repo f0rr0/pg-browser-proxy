@@ -1,0 +1,26 @@
+{
+  "name": "@f0rr0/pg-browser",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "async-mutex": "^0.5.0",
+    "debug": "^4.3.7"
+  },
+  "devDependencies": {
+    "@pg-browser-proxy/tsconfig": "workspace:*",
+    "@types/debug": "^4.1.12",
+    "@types/node": "^22.9.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.8.0-dev.20241116"
+  },
+  "files": ["dist"],
+  "exports": {
+    ".": "./dist/index.js"
+  }
+}

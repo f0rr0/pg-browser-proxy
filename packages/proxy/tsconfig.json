@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "@tsconfig/node-lts/tsconfig.json",
+    "@pg-browser-proxy/tsconfig/base.json"
+  ],
+  "include": ["./**/*.ts"],
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist",
+    "sourceMap": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true
+  }
+}

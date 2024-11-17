@@ -1,0 +1,21 @@
+{
+  "name": "@pg-browser-proxy/examples-basic",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "rsbuild build",
+    "start": "rsbuild dev"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.2.13",
+    "@f0rr0/pg-browser": "file:../../packages/browser",
+    "@f0rr0/pg-proxy": "file:../../packages/proxy"
+  },
+  "devDependencies": {
+    "@pg-browser-proxy/tsconfig": "workspace:*",
+    "@rsbuild/core": "^1.0.19",
+    "typescript": "^5.8.0-dev.20241116"
+  }
+}

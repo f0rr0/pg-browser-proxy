@@ -1,0 +1,37 @@
+{
+  "name": "@pg-browser-proxy/examples-pglite-drizzle",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev --open",
+    "typecheck": "tsc --noEmit",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
+    "db:generate": "drizzle-kit generate && bun run ./src/db/migrations/scripts/compile.ts",
+    "db:studio": "DRIZZLE_STUDIO=true drizzle-kit studio",
+    "proxy": "pg-proxy"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.2.13",
+    "@electric-sql/pglite-react": "^0.2.13",
+    "@electric-sql/pglite-repl": "^0.2.13",
+    "@f0rr0/pg-browser": "file:../../packages/browser",
+    "@f0rr0/pg-proxy": "file:../../packages/proxy",
+    "drizzle-orm": "^0.36.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@pg-browser-proxy/tsconfig": "workspace:*",
+    "@rsbuild/core": "^1.0.19",
+    "@rsbuild/plugin-react": "^1.0.6",
+    "@types/bun": "^1.1.13",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "drizzle-kit": "^0.28.1",
+    "postgres": "^3.4.5",
+    "typescript": "^5.8.0-dev.20241116"
+  },
+  "trustedDependencies": ["core-js"]
+}
