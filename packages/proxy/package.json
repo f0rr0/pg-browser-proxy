@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "description": "A WebSocket-TCP proxy that enables PostgreSQL clients to connect to a Postgres database running in the browser",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
@@ -56,11 +54,8 @@
     "@types/ws": "^8.5.13",
     "typescript": "^5.8.0-dev.20241116"
   },
-  "files": ["dist"],
+  "files": ["bin"],
   "bin": {
-    "pg-proxy": "./dist/index.js"
-  },
-  "exports": {
-    ".": "./dist/index.js"
+    "pg-proxy": "bin/index.js"
   }
 }

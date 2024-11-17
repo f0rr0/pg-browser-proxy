@@ -6,7 +6,7 @@
   "include": ["./**/*.ts"],
   "compilerOptions": {
     "noEmit": false,
-    "outDir": "dist",
+    "outDir": "bin",
     "sourceMap": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true
