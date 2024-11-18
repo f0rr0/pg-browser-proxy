@@ -7,6 +7,7 @@
     "typecheck": "turbo run typecheck",
     "lint": "biome check --write",
     "build": "turbo run build",
+    "test": "turbo run test",
     "sherif": "bunx sherif@latest"
   },
   "keywords": [

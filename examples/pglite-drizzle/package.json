@@ -16,8 +16,7 @@
     "@electric-sql/pglite": "^0.2.13",
     "@electric-sql/pglite-react": "^0.2.13",
     "@electric-sql/pglite-repl": "^0.2.13",
-    "@f0rr0/pg-browser": "workspace:*",
-    "@f0rr0/pg-proxy": "workspace:*",
+    "pg-browser-proxy": "workspace:*",
     "drizzle-orm": "^0.36.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

@@ -5,71 +5,11 @@ generator client {
 datasource db {
     provider          = "postgres"
     url               = "postgres://postgres@localhost:5432/postgres?pgbouncer=true&connection_limit=1"
-    shadowDatabaseUrl = "postgres://postgres@localhost/prisma-shadow?pgbouncer=true&connection_limit=1"
-    directUrl         = "postgres://postgres@localhost:5432/postgres?connection_limit=1"
 }
 
 model User {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    email    String
-    password String
-
-    firstName   String?
-    lastName    String?
-    role        String?
-    phoneNumber String?
-
-    settings UserSettings?
-    posts    UserPost[]
-    regions  Region[]
-}
-
-model Region {
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    regionName String @id
-    users      User[]
-}
-
-model UserPost {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    title String
-    body  String
-
-    userId String
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model UserSettings {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    receivesMarketingEmails Boolean @default(false)
-    canViewReports          Boolean @default(false)
-
-    userId String @unique
-
-    stats UserStats?
-    user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model UserStats {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    likes    Int
-    dislikes Int
-    views    Int
-
-    userSettingsId String       @unique
-    settings       UserSettings @relation(fields: [userSettingsId], references: [id], onDelete: Cascade)
+    id Int @id @default(autoincrement())
+    name String
+    created_at DateTime @default(now())
+    @@map("users")
 }

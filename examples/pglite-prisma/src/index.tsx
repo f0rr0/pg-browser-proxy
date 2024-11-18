@@ -1,8 +1,8 @@
 import { live } from "@electric-sql/pglite/live";
 import { PGliteWorker } from "@electric-sql/pglite/worker";
-import { createSocket } from "@f0rr0/pg-browser";
 import type { MigrationConfig } from "drizzle-orm/migrator";
 import { drizzle } from "drizzle-orm/pglite";
+import { connectProxy } from "pg-browser-proxy";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app.tsx";
@@ -37,7 +37,7 @@ db.waitReady
   .catch(console.error);
 
 if (process.env.NODE_ENV === "development") {
-  createSocket((message) => db.execProtocolRaw(message));
+  connectProxy((message) => db.execProtocolRaw(message));
 }
 
 const rootEl = document.getElementById("root");
