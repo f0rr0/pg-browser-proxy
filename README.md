@@ -67,7 +67,7 @@ if (process.env.NODE_ENV === "development") {
 }
 ```
 
-The key requirement is that your database must expose a method to handle raw Postgres wire protocol messages.
+The key requirement is that your database must expose be able handle raw Postgres wire protocol messages.
 
 ### 4. Connect with PostgreSQL Tools
 
@@ -98,31 +98,6 @@ export default defineConfig({
 - TCP clients have a 5-minute idle timeout
 - WebSocket connections have a 1-hour lifetime
 
-## Development
-
-### Setup
-
-1. Install dependencies:
-
-```sh
-bun install
-```
-
-2. Build the workspaces:
-
-```sh
-bun run build
-```
-
-### Development Workflow
-
-Start the proxy in development mode:
-
-```sh
-cd packages/proxy
-bun run dev
-```
-
 ### Example App
 
 An example app using PGlite with Drizzle is available in the `examples/pglite-drizzle` directory. To run it:
@@ -134,24 +109,23 @@ bun --filter './packages/*' build
 bun install # ensure pg-proxy binary is available
 ```
 
-1. Navigate to the example directory and start the proxy:
+2. Navigate to the example directory and start the proxy:
 ```sh
 cd examples/pglite-drizzle
 bun run proxy
 ```
 
-2. Start the example app:
+3. Start the example app:
 ```sh
 bun run dev
 ```
 
-3. You can then connect to the database using Drizzle Studio or any other PostgreSQL client:
+4. You can then connect to the database using Drizzle Studio or any other PostgreSQL client:
 ```sh
 bun run db:studio
 ```
 
 ## Further Reading
 
-- Built on top of [pg-gateway](https://github.com/supabase-community/pg-gateway)
-- [postgres.new](https://github.com/supabase-community/postgres-new) - The original inspiration for this local development tool
-- [postgres.new: In-browser Postgres with an AI interface](https://supabase.com/blog/postgres-new) - A blog post by Supabase about running Postgres in the browser
+- [pg-gateway](https://github.com/supabase-community/pg-gateway) - Built on top of this project
+- [postgres.new](https://supabase.com/blog/postgres-new) - A blog post by Supabase about running Postgres in the browser

@@ -13,6 +13,8 @@ import type { UserMetadata } from "./telemetry.ts";
 
 const debug = mainDebug.extend("tcp-server");
 
+const isUsingPrismaShadowDb = true;
+
 export const tcpServer = net.createServer();
 
 tcpServer.on("connection", async (socket) => {
@@ -25,10 +27,20 @@ tcpServer.on("connection", async (socket) => {
     };
 
     const connection = await fromNodeSocket(socket, {
+      serverVersion() {
+        return "16.3";
+      },
       auth: {
         method: "trust",
       },
       onStartup(state) {
+        // if (state.clientParams?.database === 'prisma-shadow') {
+        //   console.info(`Connecting client to shadow database`)
+        //   activeDb = new PGlite()
+        // }
+
+        // await activeDb.waitReady
+
         const websocket = connectionManager.getWebsocket();
 
         if (!websocket) {
@@ -64,9 +76,6 @@ tcpServer.on("connection", async (socket) => {
           client_ip: socket.localAddress ?? "unknown",
         });
         websocket.send(serialize(connectionId, clientIpMessage));
-      },
-      serverVersion() {
-        return "16.3";
       },
       onMessage(message, state) {
         if (!state.isAuthenticated) {

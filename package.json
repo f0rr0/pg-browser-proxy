@@ -33,6 +33,9 @@
     "lefthook": "^1.8.2",
     "turbo": "^2.3.0"
   },
+  "overrides": {
+    "typescript": "^5.8.0-dev.20241116"
+  },
   "homepage": "https://github.com/f0rr0/pg-browser-proxy#readme",
   "bugs": {
     "url": "https://github.com/f0rr0/pg-browser-proxy/issues"

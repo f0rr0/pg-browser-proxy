@@ -4,7 +4,7 @@
   "description": "A WebSocket-TCP proxy that enables PostgreSQL clients to connect to a Postgres database running in the browser",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf bin && tsc",
     "typecheck": "tsc --noEmit",
     "start": "node --experimental-strip-types src/index.ts",
     "dev": "node --watch --experimental-strip-types src/index.ts",
@@ -42,11 +42,12 @@
     "url": "https://github.com/sponsors/f0rr0"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
     "debug": "^4.3.7",
+    "gluegun": "^5.2.0",
     "nanoid": "^5.0.7",
     "pg-gateway": "^0.3.0-beta.3",
-    "ws": "^8.18.0",
-    "commander": "^11.1.0"
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@pg-browser-proxy/tsconfig": "workspace:*",
@@ -54,16 +55,17 @@
     "@types/debug": "^4.1.12",
     "@types/node": "^22.9.0",
     "@types/ws": "^8.5.13",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.0-dev.20241116"
   },
   "files": ["bin/src"],
-  "main": "./bin/src/index.js",
+  "main": "./bin/src/proxy.js",
   "exports": {
     ".": {
-      "import": "./bin/src/index.js"
+      "import": "./bin/src/proxy.js"
     }
   },
   "bin": {
-    "pg-proxy": "bin/src/index.js"
+    "pg-proxy": "./bin/src/cli/bin.js"
   }
 }

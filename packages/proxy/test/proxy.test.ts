@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import { DEFAULT_CONFIG } from "../src/config.ts";
-import { createProxy } from "../src/index.ts";
+import { createProxy } from "../src/proxy.ts";
 
 describe("createProxy", () => {
   it("should use default configuration when none provided", async () => {

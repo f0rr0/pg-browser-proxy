@@ -88,9 +88,8 @@ Please check:
     console.log(`
 WebSocket connection closed ${event.wasClean ? "cleanly" : "unexpectedly"}
 ${event.wasClean ? "" : "If this was unexpected, you can:"}
-${event.wasClean ? "" : "1. Reload the page to reconnect"}
-${event.wasClean ? "" : "2. Check if pg-proxy is still running"}
-${event.wasClean ? "" : "3. Check the console for any error messages"}
+${event.wasClean ? "" : "1. Check if pg-proxy is still running"}
+${event.wasClean ? "" : "2. Reload the page to reconnect"}
 Code: ${event.code}
 Reason: ${event.reason || "No reason provided"}
 `);
