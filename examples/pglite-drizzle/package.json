@@ -1,23 +1,23 @@
 {
   "name": "@pg-browser-proxy/examples-pglite-drizzle",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "rsbuild dev --open",
-    "typecheck": "tsc --noEmit",
     "build": "rsbuild build",
-    "preview": "rsbuild preview",
     "db:generate": "drizzle-kit generate && bun run ./src/db/migrations/scripts/compile.ts",
     "db:studio": "DRIZZLE_STUDIO=true drizzle-kit studio",
-    "proxy": "pg-proxy"
+    "dev": "rsbuild dev --open",
+    "preview": "rsbuild preview",
+    "proxy": "pg-proxy",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.2.13",
     "@electric-sql/pglite-react": "^0.2.13",
     "@electric-sql/pglite-repl": "^0.2.13",
-    "pg-browser-proxy": "workspace:*",
     "drizzle-orm": "^0.36.3",
+    "pg-browser-proxy": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

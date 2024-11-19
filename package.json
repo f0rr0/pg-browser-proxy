@@ -1,15 +1,7 @@
 {
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A WebSocket-TCP proxy that enables PostgreSQL clients to connect to a Postgres database running in the browser",
-  "type": "module",
-  "scripts": {
-    "typecheck": "turbo run typecheck",
-    "lint": "biome check --write",
-    "build": "turbo run build",
-    "test": "turbo run test",
-    "sherif": "bunx sherif@latest"
-  },
   "keywords": [
     "postgresql",
     "postgres",
@@ -22,29 +14,37 @@
     "prisma",
     "studio"
   ],
-  "author": "Sid Jain",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/f0rr0/pg-browser-proxy"
-  },
-  "workspaces": ["packages/*", "tooling/*", "examples/*"],
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "lefthook": "^1.8.2",
-    "turbo": "^2.3.0"
-  },
-  "overrides": {
-    "typescript": "^5.8.0-dev.20241116"
-  },
   "homepage": "https://github.com/f0rr0/pg-browser-proxy#readme",
   "bugs": {
     "url": "https://github.com/f0rr0/pg-browser-proxy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/f0rr0/pg-browser-proxy"
   },
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/f0rr0"
   },
+  "license": "MIT",
+  "author": "Sid Jain",
+  "type": "module",
+  "workspaces": ["packages/*", "tooling/*", "examples/*"],
+  "scripts": {
+    "build": "turbo run build",
+    "lint": "biome check --write",
+    "sherif": "bunx sherif@latest",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "lefthook": "^1.8.2",
+    "turbo": "^2.3.0"
+  },
   "packageManager": "bun@1.1.33",
+  "overrides": {
+    "typescript": "^5.8.0-dev.20241116"
+  },
   "trustedDependencies": ["@biomejs/biome", "esbuild", "lefthook"]
 }
