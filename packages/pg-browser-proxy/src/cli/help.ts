@@ -13,11 +13,17 @@ const command: GluegunCommand = {
     print.info(`
   ${chalk.bold.blue("🔌 PG Browser Proxy")}
   
-  ${chalk.blue("A WebSocket-TCP proxy that enables PostgreSQL clients to connect to in-browser databases")}
+  ${chalk.blue(
+    "A WebSocket-TCP proxy that enables PostgreSQL clients to connect to in-browser databases",
+  )}
   
   ${chalk.bold("Options:")}
-    -t, --tcp-port <port>    TCP port for PostgreSQL clients ${chalk.dim(`(default: ${DEFAULT_CONFIG.tcpPort})`)}
-    -w, --ws-port <port>     WebSocket port for browser connections ${chalk.dim(`(default: ${DEFAULT_CONFIG.wsPort})`)}
+    -t, --tcp-port <port>    TCP port for PostgreSQL clients ${chalk.dim(
+      `(default: ${DEFAULT_CONFIG.tcpPort})`,
+    )}
+    -w, --ws-port <port>     WebSocket port for browser connections ${chalk.dim(
+      `(default: ${DEFAULT_CONFIG.wsPort})`,
+    )}
     -s, --silent             Suppress all output
     -h, --help               Display help
     -v, --version            Display version
