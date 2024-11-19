@@ -9,17 +9,12 @@ This allows you to:
 ## How it Works
 
 The proxy creates two servers:
-1. A WebSocket server that communicates with the database instance in the browser
-2. A TCP server that accepts standard PostgreSQL client connections
+1. A WebSocket server (port 443) that communicates with the database instance in the browser
+2. A TCP server (port 5432) that accepts standard PostgreSQL client connections
 
 When a PostgreSQL client connects to the TCP server, the proxy:
 1. Forwards the client's messages to the browser through WebSocket
 2. Returns the browser's responses back to the client through TCP
-
-### Examples
-
-- [PGlite + Drizzle](https://github.com/f0rr0/pg-browser-proxy/tree/main/examples/pglite-drizzle)
-- [PGlite + Prisma](https://github.com/f0rr0/pg-browser-proxy/tree/main/examples/pglite-prisma)
 
 ## Usage
 
@@ -36,16 +31,6 @@ Using bunx:
 bunx pg-browser-proxy
 ```
 
-To use custom ports:
-```sh
-bunx pg-browser-proxy -t 5433 -w 8080
-```
-
-See all options:
-```sh
-bunx pg-browser-proxy -h
-```
-
 ### 3. Connect Your Database Instance
 
 ```typescript
@@ -60,13 +45,11 @@ const db = await PGliteWorker.create(
 
 // Connect to the proxy in development
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-  connectProxy((message) => db.execProtocolRaw(message), {
-    wsPort: 443, // optional, defaults to 443
-  });
+  connectProxy((message) => db.execProtocolRaw(message));
 }
 ```
 
-The key requirement is that your database must be able to handle raw [Postgres wire protocol](https://www.postgresql.org/docs/current/protocol.html) messages.
+The key requirement is that your database must expose be able handle raw [Postgres wire protocol](https://www.postgresql.org/docs/current/protocol.html) messages.
 
 ### 4. Connect with PostgreSQL Tools
 
@@ -94,6 +77,11 @@ export default defineConfig({
 ## Notes
 
 - Only one browser connection is allowed at a time
+
+### Examples
+
+- [PGlite + Drizzle](git+https://github.com/f0rr0/pg-browser-proxy.git/tree/main/examples/pglite-drizzle)
+- [PGlite + Prisma](git+https://github.com/f0rr0/pg-browser-proxy.git/tree/main/examples/pglite-prisma)
 
 ## Further Reading
 

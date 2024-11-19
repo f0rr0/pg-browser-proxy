@@ -32,11 +32,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/f0rr0/pg-browser-proxy"
+    "url": "git+git+https://github.com/f0rr0/pg-browser-proxy.git.git"
   },
-  "homepage": "https://github.com/f0rr0/pg-browser-proxy#readme",
+  "homepage": "git+https://github.com/f0rr0/pg-browser-proxy.git#readme",
   "bugs": {
-    "url": "https://github.com/f0rr0/pg-browser-proxy/issues"
+    "url": "git+https://github.com/f0rr0/pg-browser-proxy.git/issues"
   },
   "funding": {
     "type": "github",
@@ -73,11 +73,11 @@
       "types": "./dist/browser/index.d.ts"
     },
     "./proxy": {
-      "import": "./bin/src/proxy.js",
-      "types": "./bin/src/proxy.d.ts"
+      "import": "./dist/proxy/proxy.js",
+      "types": "./dist/proxy/proxy.d.ts"
     }
   },
   "bin": {
-    "pg-proxy": "./bin/src/cli/bin.js"
+    "pg-browser-proxy": "bin/bin.js"
   }
 }

@@ -30,7 +30,7 @@ const command: GluegunCommand = {
     $ pg-proxy --tcp-port 5433 --ws-port 8080
     
   ${chalk.bold("Documentation:")}
-    ${chalk.blue("https://github.com/f0rr0/pg-browser-proxy#readme")}
+    ${chalk.blue("git+https://github.com/f0rr0/pg-browser-proxy.git#readme")}
   
   ${chalk.bold("Environment Variables:")}
     ${chalk.dim("DEBUG")}    Enable debug logs (e.g., DEBUG=pg-proxy:*)
