@@ -21,38 +21,20 @@ When a PostgreSQL client connects to the TCP server, the proxy:
 ### 1. Install the Packages
 
 ```sh
-bun add @f0rr0/pg-browser @f0rr0/pg-proxy
+bun add pg-browser-proxy
 ```
 
 ### 2. Start the Proxy
 
-You can start the proxy either:
-
 Using bunx:
 ```sh
-bunx pg-proxy
-```
-
-Or add it to your package.json scripts:
-```json
-{
-  "scripts": {
-    "proxy": "pg-proxy"
-  }
-}
-```
-
-Then run:
-```sh
-bun run proxy
+bunx pg-browser-proxy
 ```
 
 ### 3. Connect Your Database Instance
 
-Once the proxy is running, connect your database in your application code. Here's an example using PGlite:
-
 ```typescript
-import { createSocket } from "@f0rr0/pg-browser";
+import { connectProxy } from "pg-browser-proxy";
 import { PGliteWorker } from "@electric-sql/pglite/worker";
 
 const db = await PGliteWorker.create(
@@ -62,12 +44,12 @@ const db = await PGliteWorker.create(
 );
 
 // Connect to the proxy in development
-if (process.env.NODE_ENV === "development") {
-  createSocket((message) => db.execProtocolRaw(message));
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+  connectProxy((message) => db.execProtocolRaw(message));
 }
 ```
 
-The key requirement is that your database must expose a method to handle raw Postgres wire protocol messages.
+The key requirement is that your database must expose be able handle raw [Postgres wire protocol](https://www.postgresql.org/docs/current/protocol.html) messages.
 
 ### 4. Connect with PostgreSQL Tools
 
@@ -95,64 +77,13 @@ export default defineConfig({
 ## Notes
 
 - Only one browser connection is allowed at a time
-- TCP clients have a 5-minute idle timeout
-- WebSocket connections have a 1-hour lifetime
-- The proxy includes middleware to handle pg_dump compatibility with PGlite < v0.2.8
 
-## Development
+### Examples
 
-### Setup
-
-1. Install dependencies:
-
-```sh
-bun install
-```
-
-2. Build the workspaces:
-
-```sh
-bun run build
-```
-
-### Development Workflow
-
-Start the proxy in development mode:
-
-```sh
-cd packages/proxy
-bun run dev
-```
-
-### Example App
-
-An example app using PGlite with Drizzle is available in the `examples/pglite-drizzle` directory. To run it:
-
-1. Build the core packages:
-```sh
-bun install
-bun --filter './packages/*' build 
-bun install # ensure pg-proxy binary is available
-```
-
-1. Navigate to the example directory and start the proxy:
-```sh
-cd examples/pglite-drizzle
-bun run proxy
-```
-
-2. Start the example app:
-```sh
-bun run dev
-```
-
-3. You can then connect to the database using Drizzle Studio or any other PostgreSQL client:
-```sh
-bun run db:studio
-```
+- [PGlite + Drizzle](https://github.com/f0rr0/pg-browser-proxy/tree/main/examples/pglite-drizzle)
+- [PGlite + Prisma](https://github.com/f0rr0/pg-browser-proxy/tree/main/examples/pglite-prisma)
 
 ## Further Reading
 
-- Built on top of [pg-gateway](https://github.com/supabase-community/pg-gateway)
-- [postgres.new](https://github.com/supabase-community/postgres-new) - The original inspiration for this local development tool
-- [postgres.new: In-browser Postgres with an AI interface](https://supabase.com/blog/postgres-new) - A blog post by Supabase about running Postgres in the browser
+- [pg-gateway](https://github.com/supabase-community/pg-gateway) - Built on top of this project
+- [postgres.new](https://supabase.com/blog/postgres-new) - A blog post by Supabase about running Postgres in the browser

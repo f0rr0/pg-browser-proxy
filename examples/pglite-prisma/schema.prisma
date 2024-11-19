@@ -1,0 +1,15 @@
+generator client {
+    provider        = "prisma-client-js"
+}
+
+datasource db {
+    provider          = "postgres"
+    url               = "postgres://postgres@localhost:5432/postgres?pgbouncer=true&connection_limit=1"
+}
+
+model User {
+    id Int @id @default(autoincrement())
+    name String
+    created_at DateTime @default(now())
+    @@map("users")
+}

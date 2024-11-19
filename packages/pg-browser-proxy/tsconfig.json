@@ -1,0 +1,7 @@
+{
+  "extends": "@pg-browser-proxy/tsconfig/base.json",
+  "include": ["./**/*.ts"],
+  "compilerOptions": {
+    "types": ["@vitest/browser/providers/playwright"]
+  }
+}

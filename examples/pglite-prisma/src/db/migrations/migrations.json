@@ -1,0 +1,10 @@
+[
+  {
+    "sql": [
+      "CREATE TABLE IF NOT EXISTS \"users\" (\n\t\"id\" serial PRIMARY KEY NOT NULL,\n\t\"name\" varchar(256),\n\t\"created_at\" timestamp DEFAULT now() NOT NULL\n);\n"
+    ],
+    "bps": true,
+    "folderMillis": 1731798988793,
+    "hash": "74e700310b0bc2ba2e0f0c8666952c7aae28aa9bd41452f0fac5e9b6723704f9"
+  }
+]

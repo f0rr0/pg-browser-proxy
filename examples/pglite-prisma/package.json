@@ -1,5 +1,5 @@
 {
-  "name": "@pg-browser-proxy/examples-pglite-drizzle",
+  "name": "@pg-browser-proxy/examples-pglite-prisma",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -16,8 +16,10 @@
     "@electric-sql/pglite": "^0.2.13",
     "@electric-sql/pglite-react": "^0.2.13",
     "@electric-sql/pglite-repl": "^0.2.13",
-    "drizzle-orm": "^0.36.3",
+    "bridg": "^1.1.14",
     "pg-browser-proxy": "workspace:*",
+    "pglite-prisma-adapter": "^0.3.0",
+    "prisma": "^5.22.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -28,9 +30,7 @@
     "@types/bun": "^1.1.13",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "drizzle-kit": "^0.28.1",
     "postgres": "^3.4.5",
     "typescript": "^5.8.0-dev.20241116"
-  },
-  "trustedDependencies": ["core-js"]
+  }
 }
