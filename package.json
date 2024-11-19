@@ -14,13 +14,13 @@
     "prisma",
     "studio"
   ],
-  "homepage": "git+https://github.com/f0rr0/pg-browser-proxy.git#readme",
+  "homepage": "https://github.com/f0rr0/pg-browser-proxy#readme",
   "bugs": {
-    "url": "git+https://github.com/f0rr0/pg-browser-proxy.git/issues"
+    "url": "https://github.com/f0rr0/pg-browser-proxy/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/f0rr0/pg-browser-proxy.git"
+    "url": "https://github.com/f0rr0/pg-browser-proxy"
   },
   "funding": {
     "type": "github",
